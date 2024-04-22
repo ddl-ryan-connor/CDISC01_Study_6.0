@@ -17,7 +17,7 @@
 * Output files: qc_t_pop.pdf
 *				t_pop.sas7bdat
 *               
-* Macros:       None
+* Macros:       None vt
 *         
 * Assumptions: Demo only - Second comment 20240311
 *
