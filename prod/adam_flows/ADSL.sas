@@ -31,6 +31,6 @@
 %include "/mnt/code/domino.sas";
 *********;
 
-data adam.adsl;
-	set sdtm.dm;
+data outputs.adsl;
+	set inputs.dm;
 run;

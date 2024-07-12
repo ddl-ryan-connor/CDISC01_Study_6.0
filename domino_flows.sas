@@ -153,7 +153,7 @@
   * .. and sdtm variable to identify the correct snapshot to use ;
   %let __SDTM_DATASET = %sysget(SDTM_DATASET);
   %if &__SDTM_DATASET. eq %str() %then %put %str(ER)ROR: Environment Variable SDTM_DATASET not set;
-  libname SDTM "/mnt/imported/data/snapshots/&__SDTM_DATASET./&__DCUTDTC." access=readonly;
+  libname SDTM "/workflow/inputs/sdtm_data_path" access=readonly;
   * local read/write acces to ADaM and QC folders;
   options dlcreatedir;
   libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
