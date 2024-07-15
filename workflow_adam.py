@@ -8,7 +8,7 @@ from typing import TypeVar, NamedTuple
 tfl_outputs = NamedTuple("tfl_outputs", t_ae_rel=FlyteFile[TypeVar("pdf")], t_vscat=FlyteFile[TypeVar("pdf")])
 
 @workflow
-def ADaM_TFL(sdtm_data_path: str) -> adam_outputs:
+def ADaM(sdtm_data_path: str) -> adam_outputs:
     """
     This script mocks a sample clinical trial using Domino Flows. 
 
