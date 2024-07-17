@@ -31,6 +31,6 @@
 %include "/mnt/code/domino_flows.sas";
 *********;
 
-data outputs.adsl;
-	set inputs.dm;
+data outputs.adam;
+	set SDTM.dm; *reading in the dm sas7bdat file from the SDTM Dataset which is fed in as Flow parameter.
 run;

@@ -153,12 +153,21 @@
   * .. and sdtm variable to identify the correct snapshot to use ;
   %let __SDTM_DATASET = %sysget(SDTM_DATASET);
   %if &__SDTM_DATASET. eq %str() %then %put %str(ER)ROR: Environment Variable SDTM_DATASET not set;
-  libname SDTM "/workflow/inputs/sdtm_data_path" access=readonly;
-  * local read/write acces to ADaM and QC folders;
-  options dlcreatedir;
+  
+  * Assign read/write folders for Flows inputs/outputs;
   libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
-  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT>y */ 
-  * Metadata;
+  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
+
+/* Read in the SDTM data path input from the Flow input parameter */
+data _null__;
+    infile '/workflow/inputs/sdtm_data_path' truncover;
+    input data_path $CHAR100.;
+    call symputx('data_path', data_path, 'G');
+run;
+libname SDTM "&data_path.";
+  
+
+* Metadata;
   libname METADATA "&__localdata_path./METADATA/JUL102024";
 %end;
  
