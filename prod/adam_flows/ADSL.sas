@@ -28,8 +28,20 @@
 
 *********;
 ** Setup environment including libraries for this reporting effort;
-%include "/mnt/code/domino_flows.sas";
+*%include "/mnt/code/domino_flows.sas";
 *********;
+
+* Assign read/write folders for Flows inputs/outputs;
+  libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
+  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
+
+/* Read in the SDTM data path input from the Flow input parameter */
+data _null__;
+    infile '/workflow/inputs/sdtm_data_path' truncover;
+    input data_path $CHAR100.;
+    call symputx('data_path', data_path, 'G');
+run;
+libname SDTM "&data_path.";
 
 data outputs.adam;
 	set SDTM.dm; *reading in the dm sas7bdat file from the SDTM Dataset which is fed in as Flow parameter.
