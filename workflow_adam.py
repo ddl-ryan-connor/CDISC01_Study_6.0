@@ -5,7 +5,7 @@ from utils.adam import create_adam_data
 from utils.tfl import create_tfl_report
 from typing import TypeVar, NamedTuple
 
-adam_outputs = NamedTuple("adam_outputs", adsl=FlyteFile[TypeVar("sas7bdat")])
+#adam_outputs = NamedTuple("adam_outputs", adsl=FlyteFile[TypeVar("sas7bdat")])
 
 @workflow
 def ADaM(sdtm_data_path: str):
