@@ -159,7 +159,7 @@
   libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
   libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT>y */ 
   * Metadata;
-  libname METADATA "&__localdata_path./METADATA";
+  libname METADATA "&__localdata_path./METADATA/JUL102024";
 %end;
  
 * ==================================================================;
