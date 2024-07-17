@@ -131,20 +131,7 @@
 * ==================================================================;
 * define library locations - these are dependent on the project type;
 * ==================================================================;
- 
-* SDTM ;
-* ------------------------------------------------------------------;
-%if %sysfunc(find(%upcase(&__PROJECT_TYPE.),SDTM)) ge 1 %then %do;
-  * Local read/write access to SDTM and QC folders ;
-  libname SDTMUNBD   "&__localdata_path./SDTMUNBLIND";
-  libname SDTMBLND "&__localdata_path./SDTMBLIND";
-  * Imported SDTM projects; 
-  libname RAW "&__sharedata_path./RAW" access=readonly;
-  libname UNBLIND "&__sharedata_path./UNBLIND" access=readonly;
-  libname BLIND "&__sharedata_path./BLIND" access=readonly;
-  * Metadata;
-  libname METADATA "&__localdata_path./METADATA";
-%end;
+ *Deleted SDTM for now. 
 
 * Reporting Effort (RE) project ;
 * ------------------------------------------------------------------;
