@@ -16,7 +16,7 @@ def ADaM(sdtm_data_path: str):
 
     To the run the workflow remotely, execute the following code in your terminal:
     
-    pyflyte run --remote workflow_adam.py ADaM --sdtm_data_path /mnt/imported/data/SDTMBLIND
+    pyflyte run --remote workflow_adam.py ADaM --sdtm_data_path /mnt/imported/data/SDTMBLIND/JUL162024
 
     :param sdtm_data_path: The root directory of your SDTM dataset
     :return: A list of PDF files containing the TFL reports
