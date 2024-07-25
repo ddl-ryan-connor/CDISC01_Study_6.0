@@ -43,6 +43,6 @@ data _null__;
 run;
 libname dataset "&data_path.";
 
-data outputs.adam;
+data outputs.ADSL;
 	set dataset.dm; *reading in the dm sas7bdat file from the SDTM Dataset which is fed in as Flow parameter.
 run;
