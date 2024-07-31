@@ -18,7 +18,7 @@ def ADaM_NEW(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
         output_specs=[Output(name="ADSL Dataset", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="64e3c80427f0ef13b5d3a73b", Version=34)]
+        dataset_snapshots=[DatasetSnapshot(Id="64e3c80427f0ef13b5d3a73c", Version=34)]
     ) 
 
     # Output from the task above will be used in the next step
