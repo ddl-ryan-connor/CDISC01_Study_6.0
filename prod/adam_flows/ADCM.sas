@@ -47,8 +47,8 @@ run;
 libname sdtm "&data_path.";
 *********;
 
-data output.adcm;
-	merge input.adsl sdtm.cm (in = cm);
+data outputs.adcm;
+	merge inputs.adsl sdtm.cm (in = cm);
 	by usubjid;
 	if cm;
 run;
