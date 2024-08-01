@@ -4,10 +4,10 @@ from typing import TypeVar, NamedTuple
 from flytekitplugins.domino.helpers import Input, Output, run_domino_job_task
 from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, EnvironmentRevisionSpecification, EnvironmentRevisionType, DatasetSnapshot
 
-# pyflyte run --remote workflow_adam_new.py ADaM_NEW --sdtm_dataset_snapshot /mnt/data/snapshots/SDTMBLIND/1
+# pyflyte run --remote workflow_adam.py ADaM --sdtm_dataset_snapshot /mnt/data/snapshots/SDTMBLIND/1
 
 @workflow
-def ADaM_NEW(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
+def ADaM(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
 
     #Crete ADSL dataset. The only input is the SDTM Dataset. 
     adsl = run_domino_job_task(
