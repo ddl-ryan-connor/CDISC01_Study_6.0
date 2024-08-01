@@ -32,11 +32,24 @@
 
 *********;
 ** Setup environment including libraries for this reporting effort;
-%include "/mnt/code/domino.sas";
+*%include "/mnt/code/domino.sas";
 *********;
 
+* Assign read/write folders for Flows inputs/outputs;
+  libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
+  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
+
+/* Read in the SDTM data path input from the Flow input parameter */
+data _null__;
+    infile '/workflow/inputs/sdtm_dataset_snapshot' truncover;
+    input data_path $CHAR100.;
+    call symputx('data_path', data_path, 'G');
+run;
+libname sdtm "&data_path.";
+
+
 data adae;
-	merge adam.adsl sdtm.ae (in = ae);
+	merge inputs.adsl sdtm.ae (in = ae);
 		by usubjid;
 	if ae;
 	if 1 <= aestdy < 13 then visitnum = 3;
@@ -48,7 +61,7 @@ proc sort data = adae out = adae_s;
 	by usubjid visitnum;
 run;
 
-data adam.adae;
+data outputs.adae;
 	merge adae_s (in = ae) sdtm.ex;
 	by usubjid visitnum;
 	if ae;
