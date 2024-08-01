@@ -48,7 +48,7 @@ run;
 libname sdtm "&data_path.";
 
 
-data adae;
+data outputs.adae;
 	merge inputs.adsl sdtm.ae (in = ae);
 		by usubjid;
 	if ae;
