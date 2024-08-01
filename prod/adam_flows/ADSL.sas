@@ -41,8 +41,8 @@ data _null__;
     input data_path $CHAR100.;
     call symputx('data_path', data_path, 'G');
 run;
-libname sdtm_dataset "&data_path.";
+libname sdtm "&data_path.";
 
 data outputs.adsl;
-	set sdtm_dataset.dm; *reading in the dm sas7bdat file from the SDTM Dataset which is fed in as Flow parameter.
+	set sdtm.dm; *reading in the dm sas7bdat file from the SDTM Dataset which is fed in as Flow parameter.
 run;
