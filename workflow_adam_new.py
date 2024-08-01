@@ -32,6 +32,49 @@ def ADaM_NEW(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
         dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
     
+    adcm = run_domino_job_task(
+        flyte_task_name="Create ADCM Dataset",
+        command="prod/adam_flows/ADCM.sas",
+        inputs=[Input(name="sdtm_dataset_snapshot", type=str, value=sdtm_dataset_snapshot),
+                Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"])],
+        output_specs=[Output(name="adcm", type=FlyteFile[TypeVar("sas7bdat")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+    )
+
+    adlb = run_domino_job_task(
+        flyte_task_name="Create ADLB Dataset",
+        command="prod/adam_flows/ADLB.sas",
+        inputs=[Input(name="sdtm_dataset_snapshot", type=str, value=sdtm_dataset_snapshot),
+                Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"])],
+        output_specs=[Output(name="adlb", type=FlyteFile[TypeVar("sas7bdat")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+    )
+
+    admh = run_domino_job_task(
+        flyte_task_name="Create ADMH Dataset",
+        command="prod/adam_flows/ADMH.sas",
+        inputs=[Input(name="sdtm_dataset_snapshot", type=str, value=sdtm_dataset_snapshot),
+                Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"])],
+        output_specs=[Output(name="admh", type=FlyteFile[TypeVar("sas7bdat")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+    )
+
+    advs = run_domino_job_task(
+        flyte_task_name="Create ADVS Dataset",
+        command="prod/adam_flows/ADVS.sas",
+        inputs=[Input(name="sdtm_dataset_snapshot", type=str, value=sdtm_dataset_snapshot),
+                Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"])],
+        output_specs=[Output(name="advs", type=FlyteFile[TypeVar("sas7bdat")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+    )
 
     # Output from the task above will be used in the next step
 
