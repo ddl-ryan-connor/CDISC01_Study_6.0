@@ -38,7 +38,6 @@ options
   MAUTOLOCDISPLAY 
   sasautos=(
     "/mnt/code/share/macros"
-    ,"/mnt/imported/code/SCE_STANDARD_LIB/macros"
     ,SASAUTOS) ;
 
 * Assign read/write folders for Flows inputs/outputs;
