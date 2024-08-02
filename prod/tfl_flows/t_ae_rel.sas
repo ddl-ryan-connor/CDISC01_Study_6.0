@@ -29,9 +29,45 @@
 * ----------------------------------------------------------------------------
 \*****************************************************************************/
 
-*********;
 ** Setup environment including libraries for this reporting effort;
-%include "/mnt/code/domino.sas";
+
+* ==================================================================;
+* Set SASAUTOS to search for shared macros. 
+* This would usually be in domino.sas but putting in program for now. ;
+* ==================================================================;
+options
+  MAUTOSOURCE
+  MAUTOLOCDISPLAY 
+  sasautos=(
+    "/mnt/code/share/macros"
+    ,"/mnt/imported/code/SCE_STANDARD_LIB/macros"
+    ,SASAUTOS) ;
+
+* Assign read/write folders for Flows inputs/outputs;
+  libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
+  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
+
+/* Mandatory step to add sas7bdat file extension to inputs */
+  x "mv /workflow/inputs/adsl /workflow/inputs/adsl.sas7bdat";
+  x "mv /workflow/inputs/adae /workflow/inputs/adae.sas7bdat";
+
+* Assign Metadata Dataset;
+  libname metadata "/mnt/data/snapshots/METADATA/1";
+
+
+* Assign values to these macro variables. I have no idea where they are coming from;
+  %let __PROG_NAME = t_ae_rel;       
+  %let __PROG_EXT = sas;          
+  %let __DCUTDTC = %sysfunc(today(), yymmdd10.);
+  %let __WORKING_DIR = /mnt/code;
+  %let __PROJECT_NAME = MyProject;
+  %let __PROTOCOL = MyProtocol;
+  %let __PROJECT_TYPE = MyType;
+  %let __localdata_path = /mnt/data;
+  %let __prog_path = /mnt/code/t_ae_rel.sas;
+  %let __results_path = /mnt/artifacts/results;
+  %let __runmode = batch;
+
 *********;
 
 ods path(prepend) work.templat(update);
@@ -93,7 +129,7 @@ run;
 
 data teae (rename = (actarm = trta));
     length relcat $20;
-    set adam.adae;
+    set inputs.adae;
     
 	if aerel in ('POSSIBLE' 'PROBABLE' 'DEFINITE') then relcat = 'Related';
     else relcat = 'Not Related';
@@ -105,7 +141,7 @@ run;
 
 ** exclude non-treated subjects;
 data adsl1 (rename = (actarm = trta) where = (trtan ^= .));
-    set adam.adsl;
+    set inputs.adsl;
 	
 	if actarm = "Placebo" then trtan = 1;
 	else if actarm = "Xanomeline Low Dose" then trtan = 2;
@@ -317,11 +353,30 @@ data final (drop = i);
 run;
 
 *include metadata;
-%tfl_metadata;
+data metadata;
+		set metadata.t_pop;
+	run;
+
+	** create macro variables for all variable names;
+	data _null_;
+		set metadata;
+
+		* numeric variables;
+		array xxx{*} _numeric_;
+		do i =1 to dim(xxx);
+			call symput(vname(xxx[i]),xxx[i]);
+		end;
+
+		* character variables;
+		array yyy{*} $ _character_;
+		do i =1 to dim(yyy);
+			call symput(vname(yyy[i]),yyy[i]);
+		end;
+	run; 
 
 ** create the table output;
 
-ods pdf file = "/mnt/artifacts/TFL/&__prog_name..pdf"
+ods pdf file = "workflow/outputs/t_ae_rel"
 		style = newstyle;
         
 ods noproctitle;
@@ -336,7 +391,7 @@ title4 "&Title1.";
 ** justify contents to decimal places;
 proc report data = final headline split = "*" 
 			style(report) = {width = 100%} 
-			out = tfl.&__prog_name.;
+			out = outputs.t_ae_rel_data;
         column  aesoc
                    aedecod
                    indent soc_pt_disp &byvar trt_99_npp;
