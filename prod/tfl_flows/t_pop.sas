@@ -49,7 +49,7 @@ options
   x "mv /workflow/inputs/adsl /workflow/inputs/adsl.sas7bdat";
 
 * Assignt Metadata Dataset;
-  libname METADATA "mnt/data/snapshots/METADATA/1";
+  libname metadata "mnt/data/snapshots/METADATA/1";
 
 *********;
 
