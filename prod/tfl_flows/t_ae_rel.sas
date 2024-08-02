@@ -376,7 +376,7 @@ data metadata;
 
 ** create the table output;
 
-ods pdf file = "workflow/outputs/t_ae_rel"
+ods pdf file = "/workflow/outputs/t_ae_rel"
 		style = newstyle;
         
 ods noproctitle;
