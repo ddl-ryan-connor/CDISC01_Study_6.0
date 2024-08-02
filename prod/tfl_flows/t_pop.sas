@@ -27,9 +27,19 @@
 * ----------------------------------------------------------------------------
 \*****************************************************************************/
 
-*********;
 ** Setup environment including libraries for this reporting effort;
-*%include "/mnt/code/domino.sas";
+
+* ==================================================================;
+* Set SASAUTOS to search for shared macros. 
+* This would usually be in domino.sas but putting in program for now. ;
+* ==================================================================;
+options
+  MAUTOSOURCE
+  MAUTOLOCDISPLAY 
+  sasautos=(
+    "&__WORKING_DIR./share/macros"
+    ,"&__imported_git_path./SCE_STANDARD_LIB/macros"
+    ,SASAUTOS) ;
 
 * Assign read/write folders for Flows inputs/outputs;
   libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
@@ -46,6 +56,8 @@ data _null__;
 run;
 libname sdtm "&data_path.";
 *********;
+
+
 
 
 ods path(prepend) work.templat(update);
