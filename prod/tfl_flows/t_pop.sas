@@ -48,6 +48,8 @@ options
 /* Mandatory step to add sas7bdat file extension to inputs */
   x "mv /workflow/inputs/adsl /workflow/inputs/adsl.sas7bdat";
 
+* Assignt Metadata Dataset;
+  libname METADATA "mnt/data/snapshots/METADATA/1";
 
 *********;
 
