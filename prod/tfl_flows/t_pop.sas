@@ -37,8 +37,8 @@ options
   MAUTOSOURCE
   MAUTOLOCDISPLAY 
   sasautos=(
-    "&__WORKING_DIR./share/macros"
-    ,"&__imported_git_path./SCE_STANDARD_LIB/macros"
+    "/mnt/code/share/macros"
+    ,"/mnt/imported/code/SCE_STANDARD_LIB/macros"
     ,SASAUTOS) ;
 
 * Assign read/write folders for Flows inputs/outputs;
