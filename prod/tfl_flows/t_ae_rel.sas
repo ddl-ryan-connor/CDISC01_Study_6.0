@@ -354,7 +354,7 @@ run;
 
 *include metadata;
 data metadata;
-		set metadata.t_pop;
+		set metadata.t_ae_rel;
 	run;
 
 	** create macro variables for all variable names;
