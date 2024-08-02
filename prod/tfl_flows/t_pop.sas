@@ -17,7 +17,7 @@
 * Output files: t_pop.pdf
 *				t_pop.sas7bdat
 *               
-* Macros:       tfl_metadata.sas
+* Macros:       tfl_metadata_flows.sas
 *         
 * Assumptions: 
 *
@@ -246,7 +246,7 @@ data order_results(rename = (Xanomeline_Low_Dose = Low_Dose Xanomeline_High_Dose
 run;
 
 *include metadata;
-%tfl_metadata;
+%tfl_metadata_flows;
 
 ** create the table output;
 
