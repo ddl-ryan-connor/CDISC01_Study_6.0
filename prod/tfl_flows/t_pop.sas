@@ -270,7 +270,7 @@ run;
 
 ** create the table output;
 
-ods pdf file = "/workflow/outputs/t_pop.pdf"
+ods pdf file = "/workflow/outputs/t_pop"
 		style = newstyle;
         
 ods noproctitle;
