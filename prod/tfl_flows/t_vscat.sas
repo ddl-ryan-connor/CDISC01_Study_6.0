@@ -394,7 +394,7 @@ data metadata;
 	run; 
 ** create the table output;
 
-ods pdf file = "/workflows/outputs/t_vscat"
+ods pdf file = "/workflow/outputs/t_vscat"
         style = newstyle;
         
 ods noproctitle;
