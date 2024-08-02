@@ -253,7 +253,27 @@ data order_results(rename = (Xanomeline_Low_Dose = Low_Dose Xanomeline_High_Dose
 run;
 
 *include metadata;
-%tfl_metadata_flows;
+data metadata;
+		set metadata.t_pop;
+	run;
+
+	** create macro variables for all variable names;
+	data _null_;
+		set metadata;
+
+		* numeric variables;
+		array xxx{*} _numeric_;
+		do i =1 to dim(xxx);
+			call symput(vname(xxx[i]),xxx[i]);
+		end;
+
+		* character variables;
+		array yyy{*} $ _character_;
+		do i =1 to dim(yyy);
+			call symput(vname(yyy[i]),yyy[i]);
+		end;
+	run; 
+%mend;
 
 ** create the table output;
 
