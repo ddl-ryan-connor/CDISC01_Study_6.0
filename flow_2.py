@@ -4,7 +4,7 @@ from typing import TypeVar, NamedTuple
 from flytekitplugins.domino.helpers import Input, Output, run_domino_job_task
 from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, EnvironmentRevisionSpecification, EnvironmentRevisionType, DatasetSnapshot
 
-# pyflyte run --remote flow_2.py ADaM_TFL --sdtm_dataset_snapshot /mnt/data/snapshots/SDTMBLIND/1
+# pyflyte run --remote flow_2.py ADaM_TFL --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/35
 
 @workflow
 def ADaM_TFL(sdtm_dataset_snapshot: str): 
@@ -17,7 +17,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="adsl", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     ) 
 
     #Crete ADAE dataset. This has two inputs, the SDTM Dataset and the output from the previous task i.e. ADSL. 
@@ -29,7 +29,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="adae", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
     
     adcm = run_domino_job_task(
@@ -40,7 +40,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="adcm", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     adlb = run_domino_job_task(
@@ -51,7 +51,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="adlb", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     admh = run_domino_job_task(
@@ -62,7 +62,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="admh", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     advs = run_domino_job_task(
@@ -73,7 +73,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="advs", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     t_pop = run_domino_job_task(
@@ -94,7 +94,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="t_ae_rel", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
+       # dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
     )
 
     t_vscat = run_domino_job_task(
@@ -104,7 +104,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="t_vscat", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
+       # dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
     )
 
 
