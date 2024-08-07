@@ -2,31 +2,28 @@
 *  ____                  _
 * |  _ \  ___  _ __ ___ (_)_ __   ___
 * | | | |/ _ \| '_ ` _ \| | '_ \ / _ \
-* | |_| |cds (_) | | | | | | | | | | (_) |
+* | |_| | (_) | | | | | | | | | | (_) |
 * |____/ \___/|_| |_| |_|_|_| |_|\___/
 * ____________________________________________________________________________
 * Sponsor              : Domino
 * Study                : CDISC01
-* Program              : qc_ADAE.sas
-* Purpose              : Create QC ADaM ADAE dummy dataset
+* Program              : qc_ADMH.sas
+* Purpose              : Create QC ADaM ADMH dummy dataset
 * ____________________________________________________________________________
 * DESCRIPTION
 *
-* Input files:  SDTM.AE
-*				SDTM.EX
+* Input files:  SDTM.MH
 *               qc_ADaM.qc_ADSL
 *
-* Output files: qc_ADaM.qc_ADAE
+* Output files: qc_ADaM.qc_ADMH
 *
 * Macros:       None
 *
-* Assumptions: 
+* Assumptions:
 *
 * ____________________________________________________________________________
 * PROGRAM HISTORY
 *  10MAY2023  | Megan Harries  | Original
-*  19SEP2023  | Petter Olsson  | Added this comment
-*  19SEP2023  | Petter Olsson  | Added this comment as a second comment
 * ----------------------------------------------------------------------------
 \*****************************************************************************/
 
@@ -51,21 +48,8 @@ libname sdtm "&data_path.";
 *********;
 
 
-data qc_adae;
-	merge inputs.qc_adsl sdtm.ae (in = ae);
-		by usubjid;
-	if ae;
-	if 1 <= aestdy < 13 then visitnum = 3;
-	else if 13 <= aestdy < 161 then visitnum = 4;
-	else if 162 <= aestdy then visitnum = 12;
-run;
-
-proc sort data = qc_adae out = qc_adae_s;
-	by usubjid visitnum;
-run;
-
-data outputs.qc_adae;
-	merge qc_adae_s (in = ae) sdtm.ex;
-	by usubjid visitnum;
-	if ae;
+data outputs.qc_admh;
+	merge inputs.qc_adsl sdtm.mh (in = mh);
+	by usubjid;
+	if mh;
 run;

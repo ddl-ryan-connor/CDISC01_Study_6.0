@@ -7,14 +7,14 @@
 * ____________________________________________________________________________
 * Sponsor              : Domino
 * Study                : CDISC01
-* Program              : ADSL.sas
-* Purpose              : Create ADaM ADSL dummy dataset
+* Program              : qc_ADSL.sas
+* Purpose              : Create QC ADaM ADSL dummy dataset
 * ____________________________________________________________________________
 * DESCRIPTION                                                    
 *                                                                   
 * Input files:  SDTM: DM
 *              
-* Output files: adam.ADSL
+* Output files: qc_adam.qc_ADSL
 *               
 * Macros:       None
 *         
