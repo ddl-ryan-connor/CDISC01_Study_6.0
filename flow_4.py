@@ -7,7 +7,7 @@ from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, 
 # pyflyte run --remote flow_4.py ADaM_TFL_QC --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/35
 
 @workflow
-def ADaM_only_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
+def ADaM_TFL_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
 
     #PROD 
     adsl = run_domino_job_task(
