@@ -41,17 +41,6 @@ options
     ,"/mnt/imported/code/SCE_STANDARD_LIB/macros"
     ,SASAUTOS) ;
 
-* Assign read/write folders for Flows inputs/outputs;
-  libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
-  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
-
-/* Mandatory step to add sas7bdat file extension to inputs */
-  x "mv /workflow/inputs/advs /workflow/inputs/advs.sas7bdat";
-
-* Assign Metadata Dataset;
-  libname metadata "/mnt/data/snapshots/METADATA/1";
-
-
 * Assign values to these macro variables. I have no idea where they are coming from;
   %let __PROG_NAME = t_vscat;       
   %let __PROG_EXT = sas;          
@@ -64,6 +53,25 @@ options
   %let __prog_path = /mnt/code/t_vscat.sas;
   %let __results_path = /mnt/artifacts/results;
   %let __runmode = batch;
+
+* Assign read/write folders for Flows inputs/outputs;
+  libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
+  libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
+
+/* Mandatory step to add sas7bdat file extension to inputs */
+  x "mv /workflow/inputs/advs /workflow/inputs/advs.sas7bdat";
+
+/* Read in the METADATA data path input from the Flow input parameter */
+data _null__;
+    infile '/workflow/inputs/metadata_snapshot' truncover;
+    input metadata_path $CHAR100.;
+    call symputx('metadata_path', metadata_path, 'G');
+run;
+libname sdtm "&metadata_path.";
+
+* Assign Metadata Dataset;
+  libname metadata "&metadata_path.";
+
 
 *********;
 

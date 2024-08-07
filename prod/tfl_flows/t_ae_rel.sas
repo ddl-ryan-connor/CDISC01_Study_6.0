@@ -43,6 +43,19 @@ options
     ,"/mnt/imported/code/SCE_STANDARD_LIB/macros"
     ,SASAUTOS) ;
 
+* Assign values to these macro variables. I have no idea where they are coming from;
+  %let __PROG_NAME = t_pop;       
+  %let __PROG_EXT = sas;          
+  %let __DCUTDTC = %sysfunc(today(), yymmdd10.);
+  %let __WORKING_DIR = /mnt/code;
+  %let __PROJECT_NAME = MyProject;
+  %let __PROTOCOL = MyProtocol;
+  %let __PROJECT_TYPE = MyType;
+  %let __localdata_path = /mnt/data;
+  %let __prog_path = /mnt/code/t_pop.sas;
+  %let __results_path = /mnt/results;
+  %let __runmode = batch;
+
 * Assign read/write folders for Flows inputs/outputs;
   libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
   libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
@@ -51,22 +64,16 @@ options
   x "mv /workflow/inputs/adsl /workflow/inputs/adsl.sas7bdat";
   x "mv /workflow/inputs/adae /workflow/inputs/adae.sas7bdat";
 
+/* Read in the METADATA data path input from the Flow input parameter */
+data _null__;
+    infile '/workflow/inputs/metadata_snapshot' truncover;
+    input metadata_path $CHAR100.;
+    call symputx('metadata_path', metadata_path, 'G');
+run;
+libname sdtm "&metadata_path.";
+
 * Assign Metadata Dataset;
-  libname metadata "/mnt/data/snapshots/METADATA/1";
-
-
-* Assign values to these macro variables. I have no idea where they are coming from;
-  %let __PROG_NAME = t_ae_rel;       
-  %let __PROG_EXT = sas;          
-  %let __DCUTDTC = %sysfunc(today(), yymmdd10.);
-  *%let __WORKING_DIR = /mnt/code;
-  %let __PROJECT_NAME = MyProject;
-  %let __PROTOCOL = MyProtocol;
-  %let __PROJECT_TYPE = MyType;
-  %let __localdata_path = /mnt/data;
-  %let __prog_path = /mnt/code/t_ae_rel.sas;
-  %let __results_path = /mnt/artifacts/results;
-  %let __runmode = batch;
+  libname metadata "&metadata_path.";
 
 *********;
 
