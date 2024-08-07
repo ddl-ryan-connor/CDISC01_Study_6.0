@@ -62,8 +62,16 @@ options
 /* Mandatory step to add sas7bdat file extension to inputs */
   x "mv /workflow/inputs/adsl /workflow/inputs/adsl.sas7bdat";
 
+/* Read in the METADATA data path input from the Flow input parameter */
+data _null__;
+    infile '/workflow/inputs/metadata_snapshot' truncover;
+    input metadata_path $CHAR100.;
+    call symputx('metadata_path', metadata_path, 'G');
+run;
+libname sdtm "&metadata_path.";
+
 * Assign Metadata Dataset;
-  libname metadata "/mnt/data/snapshots/METADATA/1";
+  libname metadata "&metadata_path.";
 
 
 *********;
