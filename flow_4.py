@@ -4,7 +4,7 @@ from typing import TypeVar, NamedTuple
 from flytekitplugins.domino.helpers import Input, Output, run_domino_job_task
 from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, EnvironmentRevisionSpecification, EnvironmentRevisionType, DatasetSnapshot
 
-# pyflyte run --remote flow_3.py ADaM_only_QC --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/35
+# pyflyte run --remote flow_4.py ADaM_TFL_QC --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/35
 
 @workflow
 def ADaM_only_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
@@ -69,6 +69,34 @@ def ADaM_only_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
     )
+    #PROD 
+    t_pop = run_domino_job_task(
+        flyte_task_name="Create T_POP Report",
+        command="prod/tfl_flows/t_pop.sas",
+        inputs=[Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"])],
+        output_specs=[Output(name="t_pop", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+    )
+    #PROD 
+    t_ae_rel = run_domino_job_task(
+        flyte_task_name="Create T_AE_REL Report",
+        command="prod/tfl_flows/t_ae_rel.sas",
+        inputs=[Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"]),
+                Input(name="adae", type=FlyteFile[TypeVar("sas7bdat")], value=adae["adae"])],
+        output_specs=[Output(name="t_ae_rel", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+    )
+    #PROD 
+    t_vscat = run_domino_job_task(
+        flyte_task_name="Create T_VSCAT Report",
+        command="prod/tfl_flows/t_vscat.sas",
+        inputs=[Input(name="advs", type=FlyteFile[TypeVar("sas7bdat")], value=advs["advs"])],
+        output_specs=[Output(name="t_vscat", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+    )
     #QC 
     qc_adsl = run_domino_job_task(
         flyte_task_name="Create QC ADSL Dataset",
@@ -77,8 +105,7 @@ def ADaM_only_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")
         output_specs=[Output(name="qc_adsl", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-    ) 
- 
+    )
     #QC 
     qc_adae = run_domino_job_task(
         flyte_task_name="Create QC ADAE Dataset",
@@ -126,6 +153,34 @@ def ADaM_only_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")
         inputs=[Input(name="sdtm_dataset_snapshot", type=str, value=sdtm_dataset_snapshot),
                 Input(name="qc_adsl", type=FlyteFile[TypeVar("sas7bdat")], value=qc_adsl["qc_adsl"])],
         output_specs=[Output(name="qc_advs", type=FlyteFile[TypeVar("sas7bdat")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+    )
+    #QC 
+    qc_t_pop = run_domino_job_task(
+        flyte_task_name="Create QC T_POP Report",
+        command="qc/tfl_flows/qc_t_pop.sas",
+        inputs=[Input(name="qc_adsl", type=FlyteFile[TypeVar("sas7bdat")], value=qc_adsl["qc_adsl"])],
+        output_specs=[Output(name="qc_t_pop", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+    )
+    #QC
+    qc_t_ae_rel = run_domino_job_task(
+        flyte_task_name="Create QC T_AE_REL Report",
+        command="qc/tfl_flows/qc_t_ae_rel.sas",
+        inputs=[Input(name="qc_adsl", type=FlyteFile[TypeVar("sas7bdat")], value=qc_adsl["qc_adsl"]),
+                Input(name="qc_adae", type=FlyteFile[TypeVar("sas7bdat")], value=qc_adae["qc_adae"])],
+        output_specs=[Output(name="qc_t_ae_rel", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+    )
+    #QC 
+    qc_t_vscat = run_domino_job_task(
+        flyte_task_name="Create QC T_VSCAT Report",
+        command="qc/tfl_flows/qc_t_vscat.sas",
+        inputs=[Input(name="qc_advs", type=FlyteFile[TypeVar("sas7bdat")], value=qc_advs["qc_advs"])],
+        output_specs=[Output(name="qc_t_vscat", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
     )

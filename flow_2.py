@@ -83,7 +83,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="t_pop", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
     )
 
     t_ae_rel = run_domino_job_task(
@@ -94,7 +93,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="t_ae_rel", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
     )
 
     t_vscat = run_domino_job_task(
@@ -104,7 +102,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str):
         output_specs=[Output(name="t_vscat", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
     )
 
 
