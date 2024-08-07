@@ -7,7 +7,7 @@ from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, 
 # pyflyte run --remote flow_2.py ADaM_TFL --sdtm_dataset_snapshot /mnt/data/snapshots/SDTMBLIND/1
 
 @workflow
-def ADaM_TFL(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
+def ADaM_TFL(sdtm_dataset_snapshot: str): 
 
     #Crete ADSL dataset. The only input is the SDTM Dataset. 
     adsl = run_domino_job_task(
@@ -83,8 +83,30 @@ def ADaM_TFL(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
         output_specs=[Output(name="t_pop", type=FlyteFile[TypeVar("pdf")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-        dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)] #Metadata Dataset
+        dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
     )
+
+    t_ae_rel = run_domino_job_task(
+        flyte_task_name="Create T_AE_REL Report",
+        command="prod/tfl_flows/t_ae_rel.sas",
+        inputs=[Input(name="adsl", type=FlyteFile[TypeVar("sas7bdat")], value=adsl["adsl"]),
+                Input(name="adae", type=FlyteFile[TypeVar("sas7bdat")], value=adae["adae"])],
+        output_specs=[Output(name="t_ae_rel", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+        dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
+    )
+
+    t_vscat = run_domino_job_task(
+        flyte_task_name="Create T_VSCAT Report",
+        command="prod/tfl_flows/t_vscat.sas",
+        inputs=[Input(name="advs", type=FlyteFile[TypeVar("sas7bdat")], value=advs["advs"])],
+        output_specs=[Output(name="t_vscat", type=FlyteFile[TypeVar("pdf")])],
+        use_project_defaults_for_omitted=True,
+        environment_name="SAS Analytics Pro",
+        dataset_snapshots=[DatasetSnapshot(Id="66a296135e91121fdd2c61eb", Version=1)] #Metadata Dataset
+    )
+
 
     # Output from the task above will be used in the next step
 
