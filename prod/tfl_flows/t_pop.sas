@@ -41,6 +41,20 @@ options
     ,"/mnt/imported/code/SCE_STANDARD_LIB/macros"
     ,SASAUTOS) ;
 
+* Assign values to these macro variables. I have no idea where they are coming from;
+  %let __PROG_NAME = t_pop;       
+  %let __PROG_EXT = sas;          
+  %let __DCUTDTC = %sysfunc(today(), yymmdd10.);
+  %let __WORKING_DIR = /mnt/code;
+  %let __PROJECT_NAME = MyProject;
+  %let __PROTOCOL = MyProtocol;
+  %let __PROJECT_TYPE = MyType;
+  %let __localdata_path = /mnt/data;
+  %let __prog_path = /mnt/code/t_pop.sas;
+  %let __results_path = /mnt/results;
+  %let __runmode = batch;
+
+
 * Assign read/write folders for Flows inputs/outputs;
   libname inputs "/workflow/inputs"; /* All inputs live in this directory at workflow/inputs/<NAME OF INPUT> */ 
   libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
@@ -50,8 +64,6 @@ options
 
 * Assign Metadata Dataset;
   libname metadata "/mnt/data/snapshots/METADATA/1";
-
-
 
 
 *********;
