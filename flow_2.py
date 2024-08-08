@@ -18,7 +18,7 @@ def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str):
         output_specs=[Output(name="adsl", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
+       
     ) 
 
     #Crete ADAE dataset. This has two inputs, the SDTM Dataset and the output from the previous task i.e. ADSL. 
@@ -30,7 +30,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str):
         output_specs=[Output(name="adae", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
     
     adcm = run_domino_job_task(
@@ -41,7 +40,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str):
         output_specs=[Output(name="adcm", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     adlb = run_domino_job_task(
@@ -52,7 +50,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str):
         output_specs=[Output(name="adlb", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     admh = run_domino_job_task(
@@ -63,7 +60,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str):
         output_specs=[Output(name="admh", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     advs = run_domino_job_task(
@@ -74,7 +70,6 @@ def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str):
         output_specs=[Output(name="advs", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
         environment_name="SAS Analytics Pro",
-       # dataset_snapshots=[DatasetSnapshot(Id="66a2984f62fa8d3bb129c689", Version=1)]
     )
 
     t_pop = run_domino_job_task(
