@@ -3,3 +3,4 @@ dhparams.pem
 /.snakemake
 /__pycache__
 /utils/__pycache__
+/flows/__pycache__
