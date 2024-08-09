@@ -1,6 +1,8 @@
-# Protocol CDISC01 final reporting effort repo
+# Protocol CDISC01 Study Repo
 
-This repo contains the study specfic ADaM and TFL code for the CDISC01 protocol final reporting effort.
+This repo contains the study specfic ADaM and TFL code for the CDISC01 protocol.
+
+Each reporting effort (Interim, Ad Hoc, CSR etc.) is a branch within this repo.
 
 # Directory structure
 
@@ -12,18 +14,24 @@ The global `domino.sas` autoexec progam is also included in the repository to ap
 
 ```
 repo
-├───Pipelines
+│   domino.sas
 ├───prod
 │   ├───adam
-│   └───tfl
+    ├───adam_flows
+    ├───tfl
+│   └───tfl_flows
 ├───qc
 │   ├───adam
 │   │       compare_adam.sas
-│   └───tfl
-│───share
-│   └───macros
-│───utilities
-│─── domino.sas
+    ├───adam_flows
+    ├───tfl
+│   └───tfl_flows
+├───utilities
+│       init_datasets_re.py
+│       import_metadata.sas
+├───flows
+└───share
+    └───macros
 ```
 
 # Naming convention
