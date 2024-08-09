@@ -338,7 +338,7 @@ run;
 
 ** create the table output;
 
-ods pdf file = "/mnt/artifacts/results/qc_t_vscat.pdf"
+ods pdf file = "/mnt/artifacts/TFL_QC/qc_t_vscat.pdf"
         style = newstyle;
         
 ods noproctitle;

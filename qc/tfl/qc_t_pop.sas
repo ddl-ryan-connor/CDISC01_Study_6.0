@@ -14,7 +14,7 @@
 *                                                                   
 * Input files: ADaM.ADSL
 *              
-* Output files: qc_t_pop.pdf
+* Output files: qc_t_pop.
 *				t_pop.sas7bdat
 *               
 * Macros:       None vt
@@ -232,7 +232,7 @@ run;
 
 ** create the table output;
 
-ods pdf file = "/mnt/artifacts/results/qc_t_pop.pdf"
+ods pdf file = "/mnt/artifacts/TFL_QC/qc_t_pop.pdf"
 		style = newstyle;
         
 ods noproctitle;
