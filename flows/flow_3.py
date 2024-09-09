@@ -4,7 +4,8 @@ from typing import TypeVar, NamedTuple
 from flytekitplugins.domino.helpers import Input, Output, run_domino_job_task
 from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, EnvironmentRevisionSpecification, EnvironmentRevisionType, DatasetSnapshot
 
-# pyflyte run --remote flow_3.py ADaM_only_QC --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/35
+# Enter the command below to run this Flow. There is a single Flow input parameter for the SDTM Dataset snapshot
+# pyflyte run --remote flow_3.py ADaM_only_QC --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/1
 
 @workflow
 def ADaM_only_QC(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:

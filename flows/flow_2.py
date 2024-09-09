@@ -4,8 +4,8 @@ from typing import TypeVar, NamedTuple
 from flytekitplugins.domino.helpers import Input, Output, run_domino_job_task
 from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, EnvironmentRevisionSpecification, EnvironmentRevisionType, DatasetSnapshot
 
-# Command to run this Flow. There are two Flow input parameters. One for the SDTM Dataset snapshot and one for the METADATA dataset snapshot.
-# pyflyte run --remote flow_2.py ADaM_TFL --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/35 --metadata_snapshot /mnt/data/snapshots/METADATA/1 
+# Enter the command below to run this Flow. There are two Flow input parameters. One for the SDTM Dataset snapshot and one for the METADATA dataset snapshot.
+# pyflyte run --remote flow_2.py ADaM_TFL --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/1 --metadata_snapshot /mnt/data/snapshots/METADATA/1 
 
 @workflow
 def ADaM_TFL(sdtm_dataset_snapshot: str, metadata_snapshot: str): 
