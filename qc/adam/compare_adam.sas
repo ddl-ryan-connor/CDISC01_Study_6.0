@@ -40,7 +40,7 @@ run;
 /* Compare all */
 %s_compare(base = ADAM._ALL_,
 		   comp = ADAMQC._ALL_,
-		   comprpt = '/mnt/artifacts/compare.pdf',
+		   comprpt = '/mnt/artifacts/TFL_QC/compare.pdf',
 		   prefix =,
 		   tidyup = N);
 
