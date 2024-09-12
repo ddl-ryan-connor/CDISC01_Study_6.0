@@ -335,8 +335,8 @@ title4 "&Title1.";
 
 ** justify contents to decimal places;
 proc report data = final headline split = "*" 
-			style(report) = {width = 100%} 
-			out = tfl.&__prog_name.;
+			style(report) = {width = 100%}; 
+** if you also want TFL written to Dataset	out = tfl.&__prog_name.;
         column  aesoc
                    aedecod
                    indent soc_pt_disp &byvar trt_99_npp;
