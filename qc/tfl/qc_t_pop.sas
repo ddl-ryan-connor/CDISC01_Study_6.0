@@ -245,7 +245,8 @@ title3 "Summary of Age for each Treatment";
 title4 "Analysis Set";
 
 ** justify contents to decimal places;
-proc report data = order_results headline split = "*" style(report) = {width = 100% cellpadding = 3} out = tflqc.t_pop;
+** if you want TFL to also be written to Dataset.  proc report data = order_results headline split = "*" style(report) = {width = 100% cellpadding = 3} out = tflqc.t_pop;
+proc report data = order_results headline split = "*" style(report) = {width = 100% cellpadding = 3};
         column  (order1 ageresults stat placebo low_dose high_dose);
         
         ** order variables;

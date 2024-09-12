@@ -332,8 +332,8 @@ title4 "Analysis Set";
 
 ** justify contents to decimal places;
 proc report data = final headline split = "*" 
-			style(report) = {width = 100%} 
-			out = tflqc.t_ae_rel;
+			style(report) = {width = 100%}; 
+** if you want TFL written to a Dataset   out = tflqc.t_ae_rel
         column  aesoc
                    aedecod
                    indent soc_pt_disp &byvar trt_99_npp;
