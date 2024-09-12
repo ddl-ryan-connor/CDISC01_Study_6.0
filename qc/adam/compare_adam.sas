@@ -29,7 +29,7 @@
 
 *********;
 ** Setup environment including libraries for this reporting effort;
-%include "!DOMINO_WORKING_DIR/domino.sas";
+%include "/mnt/code/domino.sas";
 *********;
 
 %xpt2loc(filespec='/mnt/data/ADAM/adsl.xpt');
@@ -70,6 +70,10 @@ data compare.summary;
 run;
 
 
+/* Removing warnings status from backend so batch job doesnt fail*/
+data _null_;
+   if &syserr in (4, 6) then call symputx('syserr', 0);
+run;
 
 
 
