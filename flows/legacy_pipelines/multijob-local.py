@@ -146,9 +146,6 @@ def start_background_job(task, command, out_log_path, err_log_path, add_timestam
     logger.info(f'{task}: Starting command: {command}')
 
     # Launch the command as a background job
-    title = command.split()[0]
-    logger.info('Invoking Domino CLI')
-    command = "/opt/domino/domino run --local --title " + title + command
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     out_thread = LogThread(task, process.stdout, out_log_path, False, add_timestamp)
