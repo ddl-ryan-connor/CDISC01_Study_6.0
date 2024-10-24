@@ -4,6 +4,8 @@ from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask
 from flytekitplugins.domino.artifact import Artifact, DATA, MODEL, REPORT
 from typing import TypeVar, NamedTuple
 
+#pyflyte run --remote workflow.py generate_artifacts
+
 # may use any name and the type DATA, MODEL or REPORT
 DataArtifact = Artifact(name="My Data", type=DATA)
 

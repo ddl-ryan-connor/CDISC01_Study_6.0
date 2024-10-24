@@ -11,9 +11,13 @@ from flytekitplugins.domino.artifact import Artifact, DATA, MODEL, REPORT
 
 ADaMDatasetArtifact = Artifact(name="ADaM Datasets", type=DATA)
 
+final_outputs = NamedTuple(
+    "final_outputs",
+    adsl_dataset=ADaMDatasetArtifact.File(name="adsl.sas7bdat")
+)
 
 @workflow
-def ADaM_only(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
+def ADaM_only(sdtm_dataset_snapshot: str) -> final_outputs: 
 
     #Crete ADSL dataset. The only input is the SDTM Dataset. 
     adsl = run_domino_job_task(
@@ -78,4 +82,4 @@ def ADaM_only(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
 
     # Output from the task above will be used in the next step
 
-    #return #final_outputs
+    return final_outputs
