@@ -36,7 +36,7 @@
   libname outputs "/workflow/outputs"; /* All outputs must go to this directory at workflow/inputs/<NAME OF OUTPUT> */ 
 
 /* Mandatory step to add sas7bdat file extension to inputs */
-  x "mv /workflow/inputs/adsl /workflow/inputs/adsl.sas7bdat";
+  x "mv /workflow/inputs/adsl /workflow/inputs/adsl_dataset.sas7bdat";
 
 /* Read in the SDTM data path input from the Flow input parameter */
 data _null__;
@@ -48,8 +48,8 @@ libname sdtm "&data_path.";
 *********;
 
 
-data outputs.advs;
-	merge inputs.adsl sdtm.vs (in = v);
+data outputs.advs_dataset;
+	merge inputs.adsl_dataset sdtm.vs (in = v);
 		by usubjid;
 	if v;
 run;
