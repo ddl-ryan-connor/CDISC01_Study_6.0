@@ -3,9 +3,14 @@ from flytekit.types.file import FlyteFile
 from typing import TypeVar, NamedTuple
 from flytekitplugins.domino.helpers import Input, Output, run_domino_job_task
 from flytekitplugins.domino.task import DominoJobConfig, DominoJobTask, GitRef, EnvironmentRevisionSpecification, EnvironmentRevisionType, DatasetSnapshot
+from flytekitplugins.domino.artifact import Artifact, DATA, MODEL, REPORT
+
 
 # Enter the command below to run this Flow. There is a single Flow input parameter for the SDTM Dataset snapshot
-# pyflyte run --remote flow_1.py ADaM_only --sdtm_dataset_snapshot /mnt/imported/data/snapshots/SDTMBLIND/1
+# pyflyte run --remote flow_1.py ADaM_only --sdtm_dataset_snapshot /mnt/imported/data/SDTMBLIND
+
+ADaMDatasetArtifact = Artifact(name="ADaM Datasets", type=DATA)
+
 
 @workflow
 def ADaM_only(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
@@ -17,7 +22,7 @@ def ADaM_only(sdtm_dataset_snapshot: str): # -> FlyteFile[TypeVar("sas7bdat")]:
         inputs=[Input(name="sdtm_snapshot_task_input", type=str, value=sdtm_dataset_snapshot)],
         output_specs=[Output(name="adsl", type=FlyteFile[TypeVar("sas7bdat")])],
         use_project_defaults_for_omitted=True,
-        environment_name="SAS Analytics Pro",
+        environment_name="SAS Analytics Pro"
     ) 
 
     #Crete ADAE dataset. This has two inputs, the SDTM Dataset and the output from the previous task i.e. ADSL. 
